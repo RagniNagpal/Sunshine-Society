@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Signup</title>
+  <link rel="stylesheet" href="css/other.css">
+</head>
+<body>
+<header class="site-header">
+    <div class="brand">🌞 Sunshine Society</div>
+    <nav id="mainNav">
+      <a id="homeLink" href="index.html">Home</a>
+      <a id="loginLink" href="login.html">Login</a>
+      </div>
+    </nav>
+</header>
+
+<main class="container small">
+    <div class="card">
+      <h2>Create account</h2>
+      <form id="signupForm">
+        <label>Full name</label>
+        <input id="name" required />
+        <label>Email</label>
+        <input id="email" type="email" required />
+        <label>Password</label>
+        <input id="password" type="password" required />
+        <label>Flat No (optional)</label>
+        <input id="flatNo" />
+        <label>Register as</label>
+        <div style="display:flex;gap:10px;margin-top:6px">
+          <label><input type="radio" name="role" value="resident" checked /> Resident</label>
+          <label><input type="radio" name="role" value="admin" /> Admin</label>
+        </div>
+        <button class="btn" type="submit" style="margin-top:12px">Signup</button>
+      </form>
+      <p class="muted">Already registered? <a href="login.html" style="text-decoration: none;">Login</a></p>
+      <div id="msg" class="msg"></div>
+    </div>
+</main>
+
+<script src="js/auth.js"></script>
+<script>
+    Auth.renderHeader();
+    document.getElementById('signupForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const data = {
+        name: document.getElementById('name').value.trim(),
+        email: document.getElementById('email').value.trim(),
+        password: document.getElementById('password').value.trim(),
+        flatNo: document.getElementById('flatNo').value.trim(),
+        role: document.querySelector('input[name="role"]:checked').value
+      };
+      const res = await Auth.signup(data);
+      const msg = document.getElementById('msg');
+      if (res.ok) {
+      } else msg.textContent = res.error || 'Signup failed';
+    });
+</script>
+</body>
+</html>

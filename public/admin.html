@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Panel</title>
+  <link rel="stylesheet" href="css/other.css">
+</head>
+<body>
+<header class="site-header">
+    <div class="brand">🌞 Sunshine Society</div>
+    <nav id="mainNav">
+      <a id="homeLink" href="index.html">Home</a>
+      <a id="loginLink" href="login.html">Login</a>
+      <a id="signupLink" href="signup.html">Signup</a>
+
+      <div id="userArea" style="display:none; align-items:center; gap:10px;">
+        <a id="dashboardLink" href="dashboard.html" style="text-decoration:none;color:inherit;">Dashboard</a>
+        <div id="userCircle" class="user-circle"></div>
+        <a id="logoutLink" href="#" class="link-logout">Logout</a>
+      </div>
+    </nav>
+</header>
+
+<main class="container">
+    <section class="card">
+      <h2 id="welcomeAdmin">Admin Panel</h2>
+      <p class="muted">Create notices and manage complaints.</p>
+    </section>
+
+    <section class="card">
+      <h3>Create Notice</h3>
+      <form id="noticeForm">
+        <label>Title</label>
+        <input id="ntitle" required />
+        <label>Body</label>
+        <textarea id="nbody" rows="4" required></textarea> <br> <br> 
+        <button class="btn" type="submit">Create</button>
+      </form>
+      <div id="nmsg" class="msg"></div>
+    </section>
+
+    <section class="card">
+      <h3>Complaints</h3>
+      <div id="adminComplaints">Loading complaints...</div>
+    </section>
+
+    <section class="card">
+      <h3>Maintenance Tracker</h3>
+      <div id="maintenanceList">Loading maintenance data...</div>
+    </section>
+
+    <section class="card">
+      <h3>Published Notices</h3>
+      <div id="noticesList">Loading notices...</div>
+    </section>
+</main>
+
+<footer class="site-footer"><small>Sunshine Society • Admin</small></footer>
+
+<script src="/socket.io/socket.io.js"></script>
+<script src="js/auth.js"></script>
+<script src="js/notices.js"></script>
+<script src="js/complaints.js"></script>
+<script src="js/admin.js"></script>
+<script src="js/socket.js"></script>
+<script>
+  Auth.renderHeader();
+  (async function(){
+    const token = Auth.getToken();
+    if (!token) return location.href = 'login.html';
+    const role = Auth.getRole();
+    if (role !== 'admin') return location.href = (role === 'resident' ? 'dashboard.html' : 'login.html');
+    const user = Auth.getUser();
+    document.getElementById('welcomeAdmin').textContent = `Hello, ${user ? user.name : 'Admin'}!`;
+
+    await Notices.renderList(document.getElementById('noticesList'), true);
+    await loadAdminComplaints();
+
+    await loadAdminMaintenance();
+
+    document.getElementById('noticeForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const title = document.getElementById('ntitle').value.trim();
+      const body = document.getElementById('nbody').value.trim();
+      const res = await Notices.create({ title, body });
+      const msgEl = document.getElementById('nmsg');
+      if (res.ok) {
+        msgEl.textContent = 'Notice created';
+        document.getElementById('noticeForm').reset();
+        await Notices.renderList(document.getElementById('noticesList'), true);
+      } else msgEl.textContent = res.data?.msg || res.error || 'Create failed';
+    });
+  })();
+</script>
+</body>
+</html>

@@ -1,0 +1,265 @@
+:root {
+  --bg: #f7fafc;
+  --card: #ffffff;
+  --accent: #0ea5a4;
+  --muted: #6b7280;
+  --maxw: 980px;
+}
+
+* {
+  box-sizing: border-box;
+  font-family: Inter, system-ui, Arial, sans-serif;
+}
+
+body {
+  margin: 0;
+  background: linear-gradient(180deg, #f0f9f9, #ffffff);
+  color: #0f172a;
+}
+
+.container {
+  max-width: var(--maxw);
+  margin: 28px auto;
+  padding: 0 16px;
+}
+
+.site-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 16px;
+  background: transparent;
+}
+
+.brand {
+  font-weight: 700;
+  font-size: 18px;
+}
+
+.site-header nav a {
+  margin-left: 12px;
+  color: var(--muted);
+  text-decoration: none;
+}
+
+.hero {
+  background: linear-gradient(90deg, #ecfeff, #ffffff);
+  padding: 28px;
+  border-radius: 12px;
+  margin-bottom: 18px;
+}
+
+.cta .btn {
+  margin-right: 8px;
+}
+
+.card {
+  background: var(--card);
+  padding: 16px;
+  border-radius: 10px;
+  box-shadow: 0 6px 18px rgba(2, 6, 23, 0.06);
+  margin-bottom: 16px;
+}
+
+.small .card {
+  padding: 20px;
+}
+
+label {
+  display: block;
+  font-size: 13px;
+  color: var(--muted);
+  margin-top: 8px;
+}
+
+input,
+textarea {
+  width: 100%;
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #e6eef0;
+  margin-top: 6px;
+  outline: none;
+}
+
+textarea {
+  resize: vertical;
+}
+
+.btn {
+  display: inline-block;
+  padding: 10px 14px;
+  border-radius: 10px;
+  background: var(--accent);
+  color: white;
+  border: 0;
+  cursor: pointer;
+}
+
+.btn.ghost {
+  background: transparent;
+  color: var(--accent);
+  border: 1px solid var(--accent);
+}
+
+.muted {
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.msg {
+  margin-top: 8px;
+  color: #b91c1c;
+}
+
+.notice {
+  padding: 12px;
+  border-radius: 8px;
+  border: 1px solid #eef6f6;
+  margin-bottom: 10px;
+}
+
+.notice h4 {
+  margin: 0 0 6px;
+}
+
+.notice p {
+  margin: 0;
+  color: var(--muted);
+}
+
+footer.site-footer {
+  padding: 14px;
+  text-align: center;
+  color: var(--muted);
+  font-size: 13px;
+  margin-top: 20px;
+}
+
+#mainNav {
+  display: flex;
+  align-items: center;
+  gap: 16px; 
+}
+
+#userArea {
+  display: flex !important;
+  align-items: center;
+  gap: 10px;
+}
+
+.user-circle {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--accent);
+  color: white;
+  font-weight: 700;
+  margin-left: 8px;
+}
+
+.link-logout {
+  color: #ef4444;
+  margin-left: 8px;
+}
+
+.small {
+  font-size: 13px;
+}
+
+@media (min-width: 900px) {
+  .grid-2 {
+    display: grid;
+    grid-template-columns: 1fr 360px;
+    gap: 16px;
+  }
+}
+
+.data-table { 
+  width: 100%; 
+  border-collapse: collapse; 
+  margin-top: 15px; 
+}
+
+.data-table th, .data-table td { 
+  border: 1px solid #ddd; 
+  padding: 8px; 
+  text-align: left; 
+}
+
+.data-table th { 
+  background-color: #eef6f6;
+  font-weight: 600; 
+}
+
+.status-paid { 
+  color: #15803d;
+  font-weight: 700; 
+  background: #dcfce7;
+  padding: 2px 6px;
+  border-radius: 4px;
+  display: inline-block;
+}
+
+.status-pending { 
+  color: #be123c; 
+  font-weight: 700; 
+  background: #fee2e2;
+  padding: 2px 6px;
+  border-radius: 4px;
+  display: inline-block;
+}
+
+.btn-small {
+  padding: 6px 10px !important;
+  font-size: 13px !important;
+}
+
+.btn-action {
+  background: #4f46e5;
+}
+
+.btn-action:hover {
+  background: #4338ca;
+}
+html[data-theme="dark"] {
+  --bg: #020617;
+  --card: #020617;
+  --text: #e5e7eb;
+  --muted: #9ca3af;
+  --accent: #22d3ee;
+}
+
+html[data-theme="dark"] body {
+  background: #020617;
+  color: var(--text);
+}
+
+html[data-theme="dark"] .card,
+html[data-theme="dark"] header {
+  background: #020617;
+  border-color: rgba(255,255,255,0.08);
+}
+
+.theme-toggle {
+  position: fixed;
+  top: 14px;
+  right: 14px;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  border: none;
+  cursor: pointer;
+  font-size: 18px;
+  background: #0f172a;
+  color: #fff;
+  z-index: 9999;
+}
+
+html[data-theme="dark"] .theme-toggle {
+  background: #fff;
+  color: #020617;
+}

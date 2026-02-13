@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login Page</title>
+  <link rel="stylesheet" href="css/other.css">
+</head>
+<body>
+<header class="site-header">
+    <div class="brand">🌞 Sunshine Society</div>
+    <nav id="mainNav">
+      <a id="homeLink" href="index.html">Home</a>
+      <a id="signupLink" href="signup.html">Signup</a>
+      </div>
+    </nav>
+</header>
+
+<main class="container small">
+    <div class="card">
+      <h2>Login</h2>
+      <form id="loginForm">
+        <label>Email</label>
+        <input id="email" type="email" required>
+        <label>Password</label>
+        <input id="password" type="password" required> <br> <br>
+        <button class="btn" type="submit">Login</button>
+      </form>
+      <p class="muted">No account? <a href="signup.html" style="text-decoration: none;">Signup</a></p>
+      <div id="msg" class="msg"></div>
+    </div>
+</main>
+
+<script src="js/auth.js"></script>
+<script>
+    Auth.renderHeader();
+    document.getElementById('loginForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const email = document.getElementById('email').value.trim();
+      const password = document.getElementById('password').value.trim();
+      const res = await Auth.login(email, password);
+      const msg = document.getElementById('msg');
+      if (res.ok) {
+      } else msg.textContent = res.error || 'Login failed';
+    });
+</script>
+</body>
+</html>

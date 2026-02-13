@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sunshine Society - Home</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<header class="site-header">
+  <div class="container nav-bar">
+    <a class="brand" href="#">
+      <div class="logo">🌞</div>
+      <div class="brand-text">
+        <strong class="brand-title">Sunshine Society</strong>
+        <small class="brand-sub muted">Community Management Portal</small>
+      </div>
+    </a>
+
+    <nav class="nav-links" aria-label="Main navigation">
+      <a class="nav-link" href="#features" data-scroll>Features</a>
+      <a class="nav-link" href="#notices" data-scroll>Notices</a>
+      <a class="nav-link" href="#about" data-scroll>About</a>
+      <a class="nav-link" href="#contact" data-scroll>Contact</a>
+    </nav>
+
+    <div class="nav-actions">
+      <a id="loginLink" class="btn ghost" href="login.html">Login</a>
+      <a id="signupLink" class="btn" href="signup.html">Signup</a>
+
+      <div id="userArea" class="user-area" style="display:none;">
+        <a id="dashboardLink" class="nav-link dash-link" href="dashboard.html">Dashboard</a>
+        <div id="userCircle" class="user-circle" aria-hidden="true"></div>
+        <span id="userName" class="user-name muted"></span>
+        <a id="logoutLink" class="link-logout" href="#">Logout</a>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main>
+    <section class="hero container">
+      <div class="hero-left">
+        <h1>Welcome to <span class="accent">Sunshine Society</span></h1>
+        <p class="lead">A friendlier, faster way to manage notices, complaints, bookings and community events — built for residents, admin and security.</p>
+        <div class="cta-row">
+          <a class="btn btn-primary" href="#notices">Explore Notices</a>
+          <a class="btn" href="#features">See Features</a>
+        </div>
+
+        <ul class="hero-tags">
+          <li>Notices & Announcements</li>
+          <li>Maintenance & Complaints</li>
+          <li>Visitor Management</li>
+        </ul>
+      </div>
+
+      <div class="hero-right">
+        <div class="photo-card">
+          <img src="https://tse1.mm.bing.net/th/id/OIP.EmBT0QJ7WrS45gmArxlEBwHaEh?pid=Api&P=0&h=180" alt="Community gathering">
+          <div class="photo-caption">
+            <h3>Community — Together</h3>
+            <p class="muted">Events, get-togethers, activities and joyful celebrations organised regularly for every resident, creating stronger bonds.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="features" class="features container">
+      <h2>What we provide</h2>
+      <p class="muted">Tools to help your society run smoothly.</p>
+
+      <div class="grid">
+        <article class="card">
+          <div class="icon">🔔</div>
+          <h3>Notices</h3>
+          <p>Publish important announcements with dates and attachments.</p>
+        </article>
+
+        <article class="card">
+          <div class="icon">🛠️</div>
+          <h3>Complaints</h3>
+          <p>Residents can raise complaints; admins can assign & close them.</p>
+        </article>
+
+        <article class="card">
+          <div class="icon">📅</div>
+          <h3>Bookings & Events</h3>
+          <p>Reserve community hall, sports area and manage events.</p>
+        </article>
+
+        <article class="card">
+          <div class="icon">💳</div>
+          <h3>Payments</h3>
+          <p>Generate invoices, record payments & show history.</p>
+        </article>
+
+        <article class="card">
+          <div class="icon">🎫</div>
+          <h3>Visitors</h3>
+          <p>Pre-register visitors and generate quick gate passes.</p>
+        </article>
+
+        <article class="card">
+          <div class="icon">👥</div>
+          <h3>Directory</h3>
+          <p>Find neighbours, call or message directly from the portal.</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="about" class="about container">
+      <h2>About Sunshine Society</h2>
+      <div class="about-grid">
+        <div>
+          <p>Sunshine Society is a neighbourhood-first platform that connects residents, committee and security — simplifying communication and management. Built to be mobile-friendly and easy to use.</p>
+          <ul>
+            <li>Secure role-based access (Resident / Admin / Security)</li>
+            <li>Manage notices, complaints and facility bookings</li>
+            <li>Track events, volunteers and visitor passes</li>
+          </ul>
+        </div>
+        <div class="about-photo">
+          <img src="https://www.commercialproperty.review/wp-content/uploads/2020/08/Purvanchal-Royal-Park-Apartmetns-Sector-137-Noida.jpg" alt="About community">
+        </div>
+      </div>
+    </section>
+
+      <section id="notices" class="section">
+      <div class="container section-inner">
+        <h2>Notices</h2>
+        <div id="noticesList" class="notices-grid">
+          <div class="muted">Loading notices…</div>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact" class="contact container">
+      <div class="contact-card card">
+        <div>
+          <h3>Ready to manage your society </h3>
+          <p class="muted">If you need support, message the admin and they’ll help you get started.</p>
+        </div>
+        <div class="contact-actions">
+          <a class="btn btn-primary" href="signup.html">Join as Resident</a>
+          <a class="btn" href="mailto:admin@sunshine.example">Contact Admin</a>
+        </div>
+      </div>
+    </section>
+</main>
+
+<footer class="site-footer container">
+    <div>© <span id="year"></span> Sunshine Society — All rights reserved</div>
+    <div class="muted">Address: Sunshine Residency, Near City Park · Emergency: +91 98xxxxxx90</div>
+</footer>
+
+<script src="/socket.io/socket.io.js"></script>
+<script src="js/auth.js"></script>
+<script src="js/notices.js"></script>
+<script src="js/home.js"></script>
+<script src="js/socket.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+      Auth.renderHeader();   
+      Home.renderAll();      
+      document.getElementById('year').textContent = new Date().getFullYear();
+
+      document.querySelectorAll('[data-scroll], a[href^="#"]').forEach(a=>{
+        a.addEventListener('click', e=>{
+          const href = a.getAttribute('href') || '';
+          if (href.startsWith('#')) {
+            e.preventDefault();
+            const id = href.slice(1);
+            const el = document.getElementById(id);
+            if (el) el.scrollIntoView({ behavior:'smooth', block:'start' });
+          }
+        });
+      });
+    });
+</script>
+</body>
+</html>

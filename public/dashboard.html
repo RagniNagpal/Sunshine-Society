@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Resident Dashboard</title>
+  <link rel="stylesheet" href="css/other.css">
+</head>
+<body>
+<header class="site-header">
+    <div class="brand">🌞 Sunshine Society</div>
+    <nav id="mainNav">
+      <a id="homeLink" href="index.html">Home</a>
+      <a id="loginLink" href="login.html">Login</a>
+      <a id="signupLink" href="signup.html">Signup</a>
+
+      <div id="userArea" style="display:none; align-items:center; gap:10px;">
+        <a id="dashboardLink" href="dashboard.html" style="text-decoration:none;color:inherit;">Dashboard</a>
+        <div id="userCircle" class="user-circle"></div>
+        <a id="logoutLink" href="#" class="link-logout">Logout</a>
+      </div>
+    </nav>
+</header>
+
+<main class="container">
+    <section class="card">
+      <h2 id="welcome">Your Dashboard</h2>
+      <p class="muted">Create complaints and track their status here.</p>
+    </section>
+
+    <section class="card">
+      <h3>Create Complaint</h3>
+      <form id="complaintForm">
+        <label>Title</label>
+        <input id="ctitle" required />
+        <label>Details</label>
+        <textarea id="cbody" rows="4" required></textarea> <br> <br> 
+        <button class="btn" type="submit">Submit Complaint</button>
+      </form>
+      <div id="cmsg" class="msg"></div>
+    </section>
+
+    <section class="card">
+      <h3>Your Complaints</h3>
+      <div id="myComplaints">Loading...</div>
+    </section>
+
+    <section class="card">
+      <h3>Notices</h3>
+      <div id="noticesList">Loading...</div>
+    </section>
+</main>
+
+<footer class="site-footer"><small>Sunshine Society • Resident</small></footer>
+
+<script src="/socket.io/socket.io.js"></script>
+<script src="js/auth.js"></script>
+<script src="js/notices.js"></script>
+<script src="js/complaints.js"></script>
+<script src="js/socket.js"></script>
+<script>
+    Auth.renderHeader();
+    (function(){
+      const token = Auth.getToken();
+      if (!token) return location.href = 'login.html';
+      const role = Auth.getRole();
+      if (role !== 'resident') return location.href = (role === 'admin' ? 'admin.html' : 'login.html');
+      const user = Auth.getUser();
+      document.getElementById('welcome').textContent = `Hello, ${user ? user.name : 'Resident'}!`;
+
+      loadNotices();
+      loadMyComplaints();
+    })();
+
+    document.getElementById('complaintForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const title = document.getElementById('ctitle').value.trim();
+      const body = document.getElementById('cbody').value.trim();
+      const res = await Complaints.create({ title, body });
+      const msg = document.getElementById('cmsg');
+      if (res.ok) {
+        msg.textContent = 'Complaint submitted';
+        document.getElementById('complaintForm').reset();
+        loadMyComplaints();
+      } else msg.textContent = res.error || 'Submit failed';
+    });
+</script>
+</body>
+</html>
